@@ -5,23 +5,23 @@ $("#startButton").on("click", function(){
 var questions = [{ 
   question: "What is the name of the female warehouse employee in the first few seasons?",
   answers:["Pudge", "Madge", "Marge", "Parge"],
-  correctAnswer: "Madge"
+  correctAnswer: "0b"
 },{
   question: "What is the name of Pam's ex-fiance?",
   answers:["Darryl", "Madge", "Roy", "Jimbo"],
-  correctAnswer: "Roy"
+  correctAnswer: "1c"
 },{
   question: "What is the name of Steve Carrell's wife's character?",
   answers:["Jan", "Holly", "Helene", "Carol"],
-  correctAnswer: "Carol"
+  correctAnswer: "2d"
 } ,{
   question: "What is the name of the big red trash compactor in the warehouse?",
   answers:["Bailor", "Palette", "Forklift", "Seamonster"],
-  correctAnswer: "Bailor"
+  correctAnswer: "3b"
 }, {
   question: "What is the name of Jims girlfriend at the end of season 1?",
   answers:["Pudge", "Pam", "Katy", "Karen"],
-  correctAnswer: "Katy"
+  correctAnswer: "4c"
 }];
   
 var game = {
@@ -45,43 +45,53 @@ var game = {
       
       $(".questionsCol").append("<p>"+questions[i].question+"</p>");
     
-      $(".questionsCol").append("<input type='radio' name='question" + i + "'> " + questions[i].answers[0]+ "</input>");
-      $(".questionsCol").append("<input type='radio' name='question" + i + "'> " + questions[i].answers[1]+ "</input>");
-      $(".questionsCol").append("<input type='radio' name='question" + i + "'> " + questions[i].answers[2]+ "</input>");
-      $(".questionsCol").append("<input type='radio' name='question" + i + "'> " + questions[i].answers[3]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "a data-answer=questions[i].answer[0] type='radio' checked name='question-" + i + "'> " +questions[i].answers[0]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "b data-answer=questions[i].answer[1] type='radio' name='question-" + i + "'> " +questions[i].answers[1]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "c data-answer=questions[i].answer[2] type='radio' name='question-" + i + "'> " +questions[i].answers[2]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "d data-answer=questions[i].answer[3] type='radio' name='question-" + i + "'> " +questions[i].answers[3]+ "</input>");
     
     };
   },
   done: function() {
-    $.each($("input[name='question-0']:checked"), function() {
-      if ($(this.val() == questions[0].correctAnswer)) {
-        game.correct++
+    console.log("done is running");
+    // $("input[name='question-0']").each(function() {
+    //   console.log($(this).val());
+    //   console.log(questions[0].answer);
+    //   if ($(this).val() === questions[0].correctAnswer) {
+    //     game.correct++
+    //   } else {
+    //     game.wrong++;
+    //   }
+    // });
+    // $.each($("input[name='question-1']:checked"), function() {
+    //   if ($(this).val() === questions[1].correctAnswer) {
+    //     game.correct++
+    //   } else {
+    //     game.wrong++;
+    //   }
+    // });
+    // $.each($("input[name='question-2']:checked"), function() {
+    //   if ($(this).val() === questions[2].correctAnswer) {
+    //     game.correct++
+    //   } else {
+    //     game.wrong++;
+    //   }
+    // });
+    // $.each($("input[name='question-3']:checked"), function() {
+    //   if ($(this).val() === questions[3].correctAnswer) {
+    //     game.correct++
+    //   } else {
+    //     game.wrong++;
+    //   };
+    // });
+    for (var i =0; i < questions.length; i++) {
+      console.log($("#1c").is(":checked"))
+      if($('#'+questions[i].correctAnswer).is(':checked')) {
+        game.correct++;
       } else {
         game.wrong++;
       }
-    });
-    $.each($("input[name='question-1']:checked"), function() {
-      if ($(this.val() == questions[1].correctAnswer)) {
-        game.correct++
-      } else {
-        game.wrong++;
-      }
-    });
-    $.each($("input[name='question-2']:checked"), function() {
-      if ($(this.val() == questions[2].correctAnswer)) {
-        game.correct++
-      } else {
-        game.wrong++;
-      }
-    });
-    $.each($("input[name='question-3']:checked"), function() {
-      if ($(this.val() == questions[3].correctAnswer)) {
-        game.correct++
-      } else {
-        game.wrong++;
-      };
-    });
-
+    }
     this.result();
   },
 
