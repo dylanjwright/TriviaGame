@@ -45,10 +45,10 @@ var game = {
       
       $(".questionsCol").append("<p>"+questions[i].question+"</p>");
     
-      $(".questionsCol").append("<input id=" +i+ "a data-answer=questions[i].answer[0] type='radio' checked name='question-" + i + "'> " +questions[i].answers[0]+ "</input>");
-      $(".questionsCol").append("<input id=" +i+ "b data-answer=questions[i].answer[1] type='radio' name='question-" + i + "'> " +questions[i].answers[1]+ "</input>");
-      $(".questionsCol").append("<input id=" +i+ "c data-answer=questions[i].answer[2] type='radio' name='question-" + i + "'> " +questions[i].answers[2]+ "</input>");
-      $(".questionsCol").append("<input id=" +i+ "d data-answer=questions[i].answer[3] type='radio' name='question-" + i + "'> " +questions[i].answers[3]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "a value='" + i + "a' type='radio' checked name='question-" + i + "'> " +questions[i].answers[0]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "b value='" + i + "b' type='radio' name='question-" + i + "'> " +questions[i].answers[1]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "c value='" + i + "c' type='radio' name='question-" + i + "'> " +questions[i].answers[2]+ "</input>");
+      $(".questionsCol").append("<input id=" +i+ "d value='" + i + "d' type='radio' name='question-" + i + "'> " +questions[i].answers[3]+ "</input>");
     
     };
   },
@@ -84,9 +84,10 @@ var game = {
     //     game.wrong++;
     //   };
     // });
+    var answers = gameContainer.children("input:checked")
+    console.log(answers);
     for (var i =0; i < questions.length; i++) {
-      console.log($("#1c").is(":checked"))
-      if($('#'+questions[i].correctAnswer).is(':checked')) {
+     if ($(answers[i]).val() === questions[i].correctAnswer) {
         game.correct++;
       } else {
         game.wrong++;
@@ -107,3 +108,4 @@ var game = {
   }
 };
 
+var gameContainer = $(".questionsCol");
